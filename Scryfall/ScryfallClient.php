@@ -448,13 +448,16 @@ final class ScryfallClient
                     'oracle_text' => ['type' => 'string'],
                     'mana_cost' => ['type' => 'string'],
                     'colors' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'W',
-                            'U',
-                            'B',
-                            'R',
-                            'G'
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'W',
+                                'U',
+                                'B',
+                                'R',
+                                'G'
+                            ]
                         ]
                     ],
                     'color_indicator' => [
