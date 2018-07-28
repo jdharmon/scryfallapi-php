@@ -14,6 +14,7 @@ final class Cards
         $this->_GetRandom_operation = $_client->createOperation('Cards_GetRandom');
         $this->_GetByMultiverseId_operation = $_client->createOperation('Cards_GetByMultiverseId');
         $this->_GetByMtgoId_operation = $_client->createOperation('Cards_GetByMtgoId');
+        $this->_GetByArenaId_operation = $_client->createOperation('Cards_GetByArenaId');
         $this->_GetByCodeByNumber_operation = $_client->createOperation('Cards_GetByCodeByNumber');
         $this->_GetById_operation = $_client->createOperation('Cards_GetById');
     }
@@ -114,6 +115,14 @@ final class Cards
         return $this->_GetByMtgoId_operation->call(['id' => $id]);
     }
     /**
+     * @param integer $id
+     * @return array
+     */
+    public function getByArenaId($id)
+    {
+        return $this->_GetByArenaId_operation->call(['id' => $id]);
+    }
+    /**
      * @param string $code
      * @param integer $number
      * @return array
@@ -164,6 +173,10 @@ final class Cards
      * @var \Microsoft\Rest\OperationInterface
      */
     private $_GetByMtgoId_operation;
+    /**
+     * @var \Microsoft\Rest\OperationInterface
+     */
+    private $_GetByArenaId_operation;
     /**
      * @var \Microsoft\Rest\OperationInterface
      */

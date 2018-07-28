@@ -258,6 +258,17 @@ final class ScryfallClient
                 ]],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/card']]]
             ]],
+            '/cards/arena/{id}' => ['get' => [
+                'operationId' => 'Cards_GetByArenaId',
+                'parameters' => [[
+                    'name' => 'id',
+                    'in' => 'path',
+                    'required' => TRUE,
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/card']]]
+            ]],
             '/cards/{code}/{number}' => ['get' => [
                 'operationId' => 'Cards_GetByCodeByNumber',
                 'parameters' => [
@@ -461,13 +472,16 @@ final class ScryfallClient
                         ]
                     ],
                     'color_indicator' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'W',
-                            'U',
-                            'B',
-                            'R',
-                            'G'
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'W',
+                                'U',
+                                'B',
+                                'R',
+                                'G'
+                            ]
                         ]
                     ],
                     'power' => ['type' => 'string'],
@@ -489,84 +503,108 @@ final class ScryfallClient
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'future' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'frontier' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'modern' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'legacy' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'pauper' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'vintage' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'penny' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'commander' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     '1v1' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'duel' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ],
                     'brawl' => [
                         'type' => 'string',
                         'enum' => [
                             'legal',
-                            'not_legal'
+                            'not_legal',
+                            'restricted',
+                            'banned'
                         ]
                     ]
                 ],
@@ -594,6 +632,10 @@ final class ScryfallClient
                         'type' => 'integer',
                         'format' => 'int32'
                     ],
+                    'arena_id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
                     'mtgo_foil_id' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -608,6 +650,7 @@ final class ScryfallClient
                         'enum' => [
                             'normal',
                             'split',
+                            'flip',
                             'transform',
                             'meld',
                             'leveler',
@@ -673,7 +716,10 @@ final class ScryfallClient
                             ]
                         ]
                     ],
-                    'all_parts' => ['$ref' => '#/definitions/related_cards'],
+                    'all_parts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/related_cards']
+                    ],
                     'card_faces' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/card_face']
