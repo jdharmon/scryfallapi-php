@@ -7,7 +7,6 @@ final class Cards
      */
     public function __construct(\Microsoft\Rest\ClientInterface $_client)
     {
-        $this->_GetAll_operation = $_client->createOperation('Cards_GetAll');
         $this->_Search_operation = $_client->createOperation('Cards_Search');
         $this->_GetNamed_operation = $_client->createOperation('Cards_GetNamed');
         $this->_Autocomplete_operation = $_client->createOperation('Cards_Autocomplete');
@@ -17,14 +16,6 @@ final class Cards
         $this->_GetByArenaId_operation = $_client->createOperation('Cards_GetByArenaId');
         $this->_GetByCodeByNumber_operation = $_client->createOperation('Cards_GetByCodeByNumber');
         $this->_GetById_operation = $_client->createOperation('Cards_GetById');
-    }
-    /**
-     * @param integer|null $page
-     * @return array
-     */
-    public function getAll($page = null)
-    {
-        return $this->_GetAll_operation->call(['page' => $page]);
     }
     /**
      * @param string $q
@@ -145,10 +136,6 @@ final class Cards
     {
         return $this->_GetById_operation->call(['id' => $id]);
     }
-    /**
-     * @var \Microsoft\Rest\OperationInterface
-     */
-    private $_GetAll_operation;
     /**
      * @var \Microsoft\Rest\OperationInterface
      */

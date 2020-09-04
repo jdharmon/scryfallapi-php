@@ -94,17 +94,6 @@ final class ScryfallClient
                 ]],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/set']]]
             ]],
-            '/cards' => ['get' => [
-                'operationId' => 'Cards_GetAll',
-                'parameters' => [[
-                    'name' => 'page',
-                    'in' => 'query',
-                    'required' => FALSE,
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]],
-                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/card_list']]]
-            ]],
             '/cards/search' => ['get' => [
                 'operationId' => 'Cards_Search',
                 'parameters' => [
